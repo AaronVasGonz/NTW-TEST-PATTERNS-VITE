@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Navbar, menuItems, AppSideBar } from './navigation';
-import { SidebarTrigger, SidebarProvider } from './ui/sidebar';
+import {  SidebarProvider } from './ui/sidebar';
 import { Button } from './ui/button';
 import { useSidebar } from "@/components/ui/sidebar";
 
@@ -36,7 +36,7 @@ export function CustomTrigger() {
 
 const Layout = () => {
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col items-stretch">
             <Navbar menuItems={menuItems} />
             
             <div className="flex flex-1">

@@ -1,23 +1,29 @@
+import { setCookie } from "@/utils/cookies";
+
 export const onSubmithandle = async (
-  data: any,
+  data: Record<string, string | number | boolean>,
   fetchUrl: string,
   method: string,
   redirectUrl: string,
   headers: Record<string, string>,
   token?: string,
   isFormData?: boolean,
-  additionalParams?: Record<string, string>
-) => {
+  additionalParams?: Record<string, string>,
+  setServerErrors?: (errors: string[]) => void,
+): Promise<void> => {
   try {
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
 
-    let body: BodyInit | FormData = data;
+    let body: BodyInit | null = null;
     if (isFormData) {
       const formData = new FormData();
       for (const key in data) {
-        formData.append(key, data[key]);
+        // eslint-disable-next-line no-prototype-builtins
+        if (data.hasOwnProperty(key)) {
+          formData.append(key, String(data[key]));
+        }
       }
       body = formData;
       delete headers['Content-Type'];
@@ -32,25 +38,35 @@ export const onSubmithandle = async (
       body,
     });
 
+
     if (!response.ok) {
-      // Si la respuesta no es exitosa, intenta analizarla como JSON
-      const responseData = await response.json();
-      console.log(responseData);  // Mostrar el error devuelto por el backend
-      throw new Error(responseData.error || 'Error desconocido');
+      const errorData = await response.json();
+      console.log('Error:', errorData);
+      if (setServerErrors) {
+        setServerErrors([errorData.message || 'An unexpected error occurred']);
+      }
+      return;
     }
 
+    //vef if the response is a token
     const responseData = await response.json();
-    console.log('Server response:', responseData);
+
+    //if the response is a token, set the cookie
+    if (responseData.jwt) {
+      setCookie('jwt', responseData.jwt, 1);
+    }
 
     let finalRedirectUrl = redirectUrl;
     if (additionalParams) {
       const queryParams = new URLSearchParams(additionalParams).toString();
       finalRedirectUrl += `?${queryParams}`;
     }
-
     window.location.href = finalRedirectUrl;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Error:', error);
-    alert(`Error: ${error.message}`);  // Mostrar un mensaje de error en el frontend
+    if (setServerErrors) {
+      setServerErrors([error.message]);
+    }
   }
 };

@@ -6,12 +6,12 @@ export const Email = ({ form }: SignInFormReturn)=>{
     return(
         <FormField
           control={form.control}
-          name="email"
+          name="emailUsername"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-black">Email</FormLabel>
+              <FormLabel className="text-black">Username or Email</FormLabel>
               <FormControl>
-                <Input className="bg-white text-black rounded" type="email" placeholder="example@example.com" {...field} />
+                <Input className="bg-white text-black rounded" placeholder="example@example.com or example123" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

@@ -10,7 +10,7 @@ export const Username = ({ form }: SignUpFormReturn)=>{
           <FormItem>
             <FormLabel className="text-black">Username</FormLabel>
             <FormControl>
-              <Input className="bg-white text-black rounded" placeholder="shadcn" {...field} />
+              <Input className="bg-white text-black rounded-xl" placeholder="shadcn" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -28,7 +28,7 @@ export const Email = ({ form }: SignUpFormReturn)=>{
             <FormItem>
               <FormLabel className="text-black">Email</FormLabel>
               <FormControl>
-                <Input className="bg-white text-black rounded" type="email" placeholder="example@example.com" {...field} />
+                <Input className="bg-white text-black rounded-xl" type="email" placeholder="example@example.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -46,7 +46,7 @@ export const Password = ({ form }: SignUpFormReturn)=>{
             <FormItem>
               <FormLabel className="text-black">Password</FormLabel>
               <FormControl>
-                <Input className="bg-white text-black rounded" type="password" placeholder="******" {...field} />
+                <Input className="bg-white text-black rounded-xl" type="password" placeholder="******" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -64,7 +64,7 @@ export const PasswordConfirm = ({ form }: SignUpFormReturn)=>{
             <FormItem>
               <FormLabel className="text-black">Password Confirm</FormLabel>
               <FormControl>
-                <Input className="bg-white text-black rounded" type="password" placeholder="******" {...field} />
+                <Input className="bg-white text-black rounded-xl" type="password" placeholder="******" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

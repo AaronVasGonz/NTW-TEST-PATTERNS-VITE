@@ -1,30 +1,26 @@
 import { SignUpForm } from "@/components/Forms/Auth/SignUpForm";
-import { Button } from "@/components/ui/button";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
-
+import GitHubOAuth from "@/components/OAuth/Github/githubOAuth";
+import { LoginWithGoogle } from "@/components/OAuth/Google/googleOAuth";
 
 export default function SignUp() {
     return (
-        <div className="flex flex-col items-center bg-gray-600 bg-opacity-10 sm:w-1/2 w-full sm:mx-[15rem] text-white p-4 rounded ">
+        <div className="flex flex-col items-center bg-gray-600 bg-opacity-10 sm:w-1/2 w-full sm:mx-auto sm:my-8 text-white p-4 rounded-xl">
             <SignUpForm />
-            <span className="text-blue-900">or</span>
-            <div className="flex gap-4">
-                <Button className="rounded-full p-3 bg-red-600 hover:bg-red-800">
-                    <FontAwesomeIcon
-                        icon={faGoogle} className="text-white"
-                    />
-                </Button>
-                <Button className="rounded-full p-3 ">
-                    <FontAwesomeIcon
-                        icon={faGithub} className="text-white"
-                    />
-                </Button>
+            <div className="my-4">
+                <span className="text-blue-900">or</span>
+            </div>
+            <div className="flex gap-4 mb-4">
+                <LoginWithGoogle />
+                <GitHubOAuth isSignIn={false} />
             </div>
             <div>
-                <p className="text-black">Already have an account? <a href="/signIn" className="text-blue-900">Sign In</a></p>
+                <p className="text-black">
+                    Already have an account? {" "}
+                    <a href="/signIn" className="text-blue-900 hover:text-blue-700">
+                        Sign In
+                    </a>
+                </p>
             </div>
         </div>
-    )
+    );
 }
-

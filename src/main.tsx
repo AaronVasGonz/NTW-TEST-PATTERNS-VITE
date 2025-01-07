@@ -1,5 +1,6 @@
 
 
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './pages/about/About.tsx';
 import SignIn from './pages/signIn/SignIn.tsx';
@@ -14,16 +15,18 @@ import EmailVerified from './pages/signUp/verified/EmailVerified.tsx';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<App />} />
-          <Route path="signIn" element={<SignIn />} />
-          <Route path="signUp" element={<SignUp />} />
-          <Route path="signUp/verify" element={<EmailVerify />} />
-          <Route path='signUp/EmailVerify' element={<EmailVerified />} />
-          <Route path="about" element={<About />} />
-        </Route>
-      </Routes>
+      <GoogleOAuthProvider clientId='848823528545-ts2t0netv6bv518fqvk4u7pe3acjfnql.apps.googleusercontent.com'>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<App />} />
+            <Route path="signIn" element={<SignIn />} />
+            <Route path="signUp" element={<SignUp />} />
+            <Route path="signUp/verify" element={<EmailVerify />} />
+            <Route path='signUp/EmailVerify' element={<EmailVerified />} />
+            <Route path="about" element={<About />} />
+          </Route>
+        </Routes>
+      </GoogleOAuthProvider>
     </BrowserRouter>
   </StrictMode>,
 )
